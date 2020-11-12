@@ -26,7 +26,7 @@ J = (1 ./ ( 2.* m ) .* sum((Hx - y).^2)) + (lambda ./ (2 .* m)) .* sum(theta(2:e
 grad(1) = (1./m).*sum(Hx - y);
 temp = ones(size(X));
 temp = (temp .* (Hx-y)) .* X ./ m;
-temp = sum(temp)';
+temp = sum(temp, 1)';
 temp((2:end), :) += (lambda ./ m) .* theta((2:end), :); 
 grad(2:end) = temp((2:end), :);
 

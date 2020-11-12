@@ -14,7 +14,7 @@
 %  For this exercise, you will not need to change any code in this file,
 %  or any other files other than those mentioned above.
 %
-
+warning("off", "Octave:broadcast");
 %% Initialization
 clear ; close all; clc
 
@@ -104,7 +104,7 @@ pause;
 %                 see a graph with "high bias" -- Figure 3 in ex5.pdf 
 %
 
-lambda = 0;
+lambda = 0.01;
 [error_train, error_val] = ...
     learningCurve([ones(m, 1) X], y, ...
                   [ones(size(Xval, 1), 1) Xval], yval, ...
@@ -164,7 +164,7 @@ pause;
 %  lambda to see how the fit and learning curve change.
 %
 
-lambda = 0;
+lambda = 0.01;
 [theta] = trainLinearReg(X_poly, y, lambda);
 
 % Plot training data and fit
@@ -217,4 +217,7 @@ for i = 1:length(lambda_vec)
 end
 
 fprintf('Program paused. Press enter to continue.\n');
+theta = trainLinearReg(X_poly, y, lambda);
+[error_test,_] = linearRegCostFunction(X_poly_test, ytest, theta, 0)
+
 pause;

@@ -54,11 +54,26 @@ error_val   = zeros(m, 1);
 % ---------------------- Sample Solution ----------------------
 
 
-
-
-
-
-
+for i = 1 : m
+    errorT = 0;
+    errorV = 0;
+    for c = 1:50
+        k = randperm(size(X,1));
+        Xnew = X(k(1:i),:);
+        ynew = y(k(1:i),:);
+        Xvalnew = Xval(k(1:i),:);
+        yvalnew = yval(k(1:i),:);
+        theta = trainLinearReg(Xnew, ynew, lambda);
+        [t,_] =  linearRegCostFunction(Xnew, ynew, theta, 0);
+        errorT += t;
+        [v,_] = linearRegCostFunction(Xvalnew, yvalnew, theta, 0);
+        errorV += v;
+    end
+    errorT./50;
+    errorV./50;
+    error_train(i) = errorT;
+    error_val(i) = errorV;
+end
 % -------------------------------------------------------------
 
 % =========================================================================
